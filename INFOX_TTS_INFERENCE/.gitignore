@@ -131,6 +131,9 @@ dmypy.json
 
 .idea/
 
-./output/*
+output/
+**/models/our_models/*
+**/models/vakyansh_models/*
+
 
 
