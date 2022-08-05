@@ -1,0 +1,2 @@
+/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs_22k/ku_hackfest_part_1_0.wav|यो पुस्तक पढेपछि
+/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs_22k/ku_hackfest_part_1_4.wav|किन कुनै व्यक्तिका तल्लो डरपोक हुन्छ

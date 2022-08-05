@@ -131,4 +131,7 @@ dmypy.json
 
 .idea/
 
-./checkpoints/glow/male/
+
+*/checkpoints/glow/male/*
+*/data/wavs/
+*/data/wavs_22k/
