@@ -5,24 +5,17 @@ import DashboardLayout from "./layouts/dashboard";
 import LogoOnlyLayout from "./layouts/LogoOnlyLayout";
 
 import Login from "./pages/Login";
-import Register from "./pages/Register";
-import DashboardApp from "./pages/DashboardApp";
-import Blog from "./pages/Blog";
 import NotFound from "./pages/Page404";
-// import { AuthContext } from './context/AuthContext';
-import Videos from "./pages/Videos";
-import Gallery from "./pages/Gallery";
-import Program from "./pages/Program";
-import Train from "./pages/Train";
-import Model from "./pages/Model";
 import Explore from "./pages/Explore";
+import MyNfts from "./pages/MyNfts";
+import { AppContext } from "./context/AppContext";
 
 // ----------------------------------------------------------------------
 
-// const PrivateRoute = ({ children }) => {
-//   const auth = useContext(AuthContext);
-//   return auth.isAuthenticated() ? children : <Navigate to="/login" />;
-// };
+const PrivateRoute = ({ children }) => {
+  const app = useContext(AppContext);
+  return app.walletKey ? children : <Navigate to="/login" />;
+};
 
 export default function Router() {
   return useRoutes([
@@ -31,62 +24,14 @@ export default function Router() {
       element: <DashboardLayout />,
       children: [
         {
-          element: <Navigate to="/dashboard/app" replace />,
+          element: <Navigate to="/dashboard/nfts" replace />,
         },
         {
-          path: "app",
+          path: "nfts",
           element: (
-            // <PrivateRoute>
-            <DashboardApp />
-            // </PrivateRoute>
-          ),
-        },
-        {
-          path: "train",
-          element: (
-            // <PrivateRoute>
-            <Train />
-            // </PrivateRoute>
-          ),
-        },
-        {
-          path: "model",
-          element: (
-            // <PrivateRoute>
-            <Model />
-            // </PrivateRoute>
-          ),
-        },
-        {
-          path: "programs",
-          element: (
-            // <PrivateRoute>
-            <Program />
-            // </PrivateRoute>
-          ),
-        },
-        {
-          path: "videos",
-          element: (
-            // <PrivateRoute>
-            <Videos />
-            // </PrivateRoute>
-          ),
-        },
-        {
-          path: "blog",
-          element: (
-            // <PrivateRoute>
-            <Blog />
-            // </PrivateRoute>
-          ),
-        },
-        {
-          path: "gallery",
-          element: (
-            // <PrivateRoute>
-            <Gallery />
-            // </PrivateRoute>
+            <PrivateRoute>
+              <MyNfts />
+            </PrivateRoute>
           ),
         },
       ],

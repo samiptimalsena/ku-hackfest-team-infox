@@ -1,26 +1,26 @@
 // material
-import { styled } from '@mui/material/styles';
-import { Container, Typography, Paper } from '@mui/material';
+import { styled } from "@mui/material/styles";
+import { Container, Typography, Paper } from "@mui/material";
 // layouts
 // components
-import Page from '../components/Page';
-import { LoginForm } from '../components/authentication/login';
+import Page from "../components/Page";
+import { LoginForm } from "../components/authentication/login";
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({
-  [theme.breakpoints.up('md')]: {
-    display: 'flex'
-  }
+  [theme.breakpoints.up("md")]: {
+    display: "flex",
+  },
 }));
 
-const ContentStyle = styled('div')(({ theme }) => ({
+const ContentStyle = styled("div")(({ theme }) => ({
   maxWidth: 480,
-  margin: 'auto',
-  display: 'flex',
-  minHeight: '100vh',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  padding: theme.spacing(12, 0)
+  margin: "auto",
+  display: "flex",
+  minHeight: "100vh",
+  flexDirection: "column",
+  justifyContent: "center",
+  padding: theme.spacing(12, 0),
 }));
 
 // ----------------------------------------------------------------------
@@ -30,7 +30,7 @@ export default function Login() {
     <RootStyle title="Login | Admin Panel">
       <Container maxWidth="sm">
         <ContentStyle>
-          <Paper sx={{ mb: 5, textAlign: 'center', p: 6 }} elevation={2}>
+          <Paper sx={{ mb: 5, textAlign: "center", p: 6 }} elevation={2}>
             <Typography variant="h4" gutterBottom>
               Log in
             </Typography>

@@ -25,7 +25,7 @@ import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
 import NFTCard from "../components/NFTCard";
 import { db } from "../service/firebase";
 
-export default function Explore() {
+export default function MyNfts() {
   const [sentences, setSentences] = useState("");
   const [showAudioWave, setShowAudioWave] = useState(false);
   const [models, setModels] = useState(null);
@@ -49,7 +49,7 @@ export default function Explore() {
           mt={10}
         >
           <Typography variant="h4" gutterBottom>
-            Explore Models
+            My NFTs
           </Typography>
         </Stack>
         <Grid container spacing={4} justifyContent="center">

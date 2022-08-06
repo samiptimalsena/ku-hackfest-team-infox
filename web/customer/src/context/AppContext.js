@@ -1,16 +1,17 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
 
 const AppContext = createContext();
 const { Provider } = AppContext;
 
 const AppProvider = ({ children }) => {
   const [showAlert, setShowAlert] = useState(false);
-  const [severity, setSeverity] = useState('');
-  const [message, setMessage] = useState('');
+  const [severity, setSeverity] = useState("");
+  const [message, setMessage] = useState("");
+  const [walletKey, setWalletKey] = useState("");
   const handleAlert = (
     obj = {
-      type: 'error',
-      message: 'Something went wrong!'
+      type: "error",
+      message: "Something went wrong!",
     }
   ) => {
     setShowAlert(true);
@@ -25,7 +26,9 @@ const AppProvider = ({ children }) => {
         showAlert,
         setShowAlert,
         severity,
-        message
+        message,
+        walletKey,
+        setWalletKey,
       }}
     >
       {children}

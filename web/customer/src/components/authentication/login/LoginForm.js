@@ -1,26 +1,27 @@
-import * as Yup from 'yup';
-import { useContext, useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useFormik, Form, FormikProvider } from 'formik';
-import { Icon } from '@iconify/react';
-import eyeFill from '@iconify/icons-eva/eye-fill';
-import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
-import googleFill from '@iconify/icons-eva/google-fill';
-import walletFill from '@iconify/icons-ic/account-balance-wallet';
+import * as Yup from "yup";
+import { useContext, useState } from "react";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useFormik, Form, FormikProvider } from "formik";
+import { Icon } from "@iconify/react";
+import eyeFill from "@iconify/icons-eva/eye-fill";
+import eyeOffFill from "@iconify/icons-eva/eye-off-fill";
+import googleFill from "@iconify/icons-eva/google-fill";
+import walletFill from "@iconify/icons-ic/account-balance-wallet";
 // material
-import { Stack, Typography } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
-import { AppContext } from '../../../context/AppContext';
-import publicFetch from '../../../utils/fetch';
-import { AuthContext } from '../../../context/AuthContext';
-import { signInWithGoogle } from '../../../service/firebase';
+import { Stack, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { AppContext } from "../../../context/AppContext";
+import publicFetch from "../../../utils/fetch";
+import { AuthContext } from "../../../context/AuthContext";
+import { signInWithGoogle } from "../../../service/firebase";
+import { Wallet } from "./wallet";
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   return (
     <Stack spacing={2}>
-      <LoadingButton
+      {/* <LoadingButton
         fullWidth
         size="large"
         type="submit"
@@ -29,15 +30,21 @@ export default function LoginForm() {
         onClick={signInWithGoogle}
         loading={false}
       >
-        <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
+        <Stack
+          direction="row"
+          spacing={2}
+          justifyContent="center"
+          alignItems="center"
+        >
           <Icon icon={googleFill} color="#ffffff" height={24} />
 
           <Typography variant="button" sx={{ fontSize: 16 }}>
             Login With Google
           </Typography>
         </Stack>
-      </LoadingButton>
-      <LoadingButton
+      </LoadingButton> */}
+      <Wallet />
+      {/* <LoadingButton
         fullWidth
         size="large"
         type="submit"
@@ -45,13 +52,18 @@ export default function LoginForm() {
         variant="contained"
         loading={false}
       >
-        <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
+        <Stack
+          direction="row"
+          spacing={2}
+          justifyContent="center"
+          alignItems="center"
+        >
           <Icon icon={walletFill} color="#ffffff" height={24} />
           <Typography variant="button" sx={{ fontSize: 16 }}>
             Login With Wallet
           </Typography>
         </Stack>
-      </LoadingButton>
+      </LoadingButton> */}
     </Stack>
   );
 }

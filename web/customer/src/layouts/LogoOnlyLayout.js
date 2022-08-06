@@ -3,6 +3,7 @@ import { Link as RouterLink, Outlet } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 // components
 import Logo from "../components/Logo";
+import DashboardNavbar from "./dashboard/DashboardNavbar";
 
 // ----------------------------------------------------------------------
 
@@ -24,6 +25,7 @@ export default function LogoOnlyLayout() {
   return (
     <>
       <HeaderStyle>
+        <DashboardNavbar onOpenSidebar={() => {}} />
         <RouterLink to="/">
           <Logo />
         </RouterLink>
