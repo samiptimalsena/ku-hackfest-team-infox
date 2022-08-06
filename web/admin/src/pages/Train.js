@@ -22,7 +22,7 @@ export default function Train() {
   const [open, setOpen] = useState(false);
   // const [openEditNewsModal, setOpenEditNewsModal] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-  const [showTrainedModel, setShowTrainedModel] = useState(true);
+  const [showTrainedModel, setShowTrainedModel] = useState(false);
 
   const [sentencesAudios, setSentencesAudios] = useState({
     0: null,
@@ -219,16 +219,11 @@ export default function Train() {
                                       console.log(`${pair[0]}, ${pair[1]}`);
                                     }
 
-                                    // axios
-                                    //   .post('http://192.168.18.186:8888', formData)
-                                    //   .then((res) => console.log(res))
-                                    //   .catch((err) => console.error(err));
-
                                     // setTimeout(() => {}, []);
                                     toast.promise(
                                       (async () => {
                                         try {
-                                          await later(3000, 'sendaudio');
+                                          // await later(3000, 'sendaudio');
                                           // setTimeout(() => {
                                           //   console.log('done!!');
                                           // }, [3000]);
@@ -246,6 +241,11 @@ export default function Train() {
                                           // const { data } = res;
                                           // setOutput(data.output);
                                           // console.log('data from res', data.output);
+                                          await axios.post(
+                                            'http://127.0.0.1:4000/upload',
+                                            formData
+                                          );
+
                                           setShowTrainedModel(true);
                                         } catch (error) {
                                           throw console.log(error);

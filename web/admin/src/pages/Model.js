@@ -1,6 +1,7 @@
 import { Icon } from '@iconify/react';
 import boltFill from '@iconify/icons-ic/round-bolt';
 import { useState } from 'react';
+import axios from 'axios';
 // import { Link as RouterLink } from 'react-router-dom';
 // material
 import { Grid, Button, Container, Stack, Typography, TextField } from '@mui/material';
@@ -9,10 +10,11 @@ import Page from '../components/Page';
 import Waveform from '../components/Waveform';
 
 export default function Model() {
-  const [sentences, setSentences] = useState('');
+  const [sentences, setSentences] = useState('मेरो नाम सन्तोश सुबेदी हो ');
   const [showAudioWave, setShowAudioWave] = useState(false);
   const [isModelAvailable, setIsModelAvailable] = useState(false);
   const [isDemoModelActivated, setIsDemoModelActivated] = useState(false);
+  const [file, setFile] = useState('');
   return (
     <Page title="Dashboard: Recent Activities">
       <Container maxWidth="lg">
@@ -81,11 +83,24 @@ export default function Model() {
             <Button
               variant="contained"
               sx={{ fontSize: 20 }}
-              onClick={() => setShowAudioWave(true)}
+              onClick={async () => {
+                const res = await axios.post('http://127.0.0.1:5000/check', {
+                  text: sentences,
+                  username: 'sanup'
+                });
+                const binaryData = [];
+                binaryData.push(res.data);
+                const file = window.URL.createObjectURL(
+                  new Blob(binaryData, { type: 'audio/wav' })
+                );
+
+                setFile(file);
+                // setFile(res.data);
+              }}
             >
               Send
             </Button>
-            {showAudioWave && <Waveform demo />}
+            {file && <Waveform url={file} />}
           </Stack>
         )}
       </Container>

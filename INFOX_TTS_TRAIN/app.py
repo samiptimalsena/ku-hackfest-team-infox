@@ -1,15 +1,26 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from utils import train_glow
+from flask_cors import CORS
+import os
 
 app = Flask(__name__)
+CORS(app)
+
+UPLOAD_FOLDER = "/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs/"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 def main():
     return jsonify({"message": "Welcome to INFOX-Training"})
 
-@app.route("/upload")
+@app.route("/upload", methods=['POST'])
 def upload():
-    pass
+    files = request.files
+    for i in range(2):
+        wav_file = files.get(str(i))
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], f'train_demo_{str(i)}.wav')
+        wav_file.save(file_path)
+    return jsonify({"message":"api working fine"})
 
 @app.route("/train")
 def train():
@@ -22,4 +33,4 @@ def healthz():
     return "API is up and running"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=4000)
