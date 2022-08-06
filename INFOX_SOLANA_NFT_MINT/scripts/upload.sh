@@ -9,5 +9,5 @@ $CLI upload -e devnet -k $FEE_PAYER -cp $CONFIG -c example $ASSETS
 echo "\nVeriying metadata 🔎\n"
 $CLI verify_upload -e devnet -k $FEE_PAYER -c example
 
-clear
+# clear
 echo "Successfullu launced the nft"  

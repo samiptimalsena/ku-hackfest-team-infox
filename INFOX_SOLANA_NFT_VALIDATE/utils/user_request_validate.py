@@ -15,10 +15,11 @@ savedCollections = {
 def user_nft_request(address, sig, data, nft_mint_address):
     # checks if nft belongs to the registered model collection
     candy_machine_id = nft_utils.get_nft_candy_machine_id(nft_mint_address)
-    model_name = savedCollections.get(candy_machine_id)
-    if not model_name:
-        print("candy mint not found")
-        return [False, None]
+    model_name = savedCollections.get(candy_machine_id,"model_name_user")
+
+    # if not model_name:
+    #     print("candy mint not found")
+    #     return [False, None]
     
     # check_if_address_owns_nft(address,nft_mint_address)
     if address != nft_utils.get_nft_owner(nft_mint_address):
