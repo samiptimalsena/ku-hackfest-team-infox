@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import SwipeableViews from 'react-swipeable-views';
 import { ReactMediaRecorder } from 'react-media-recorder';
+import axios from 'axios';
 // material
 import { Stack, Container, Typography, Paper, Button, Grid, Backdrop } from '@mui/material';
 import micFill from '@iconify/icons-eva/mic-fill';
@@ -23,10 +24,10 @@ export default function Train() {
 
   const [sentencesAudios, setSentencesAudios] = useState({
     0: null,
-    1: null,
-    2: null,
-    3: null,
-    4: null
+    1: null
+    // 2: null,
+    // 3: null,
+    // 4: null
   });
 
   useEffect(() => {
@@ -56,13 +57,13 @@ export default function Train() {
     }
   }, [scriptLoaded, open]);
 
-  const TOTAL_STEP = 5;
+  const TOTAL_STEP = 2;
   const content = [
     'This is train data 1',
-    'This is train data 2',
-    'This is train data 3',
-    'This is train data 4',
-    'This is train data 5'
+    'This is train data 2'
+    // 'This is train data 3',
+    // 'This is train data 4',
+    // 'This is train data 5'
   ];
 
   return (
@@ -143,7 +144,7 @@ export default function Train() {
                           </Button>
                         )}
                         <Grid item>
-                          {activeStep !== 4 ? (
+                          {activeStep !== 1 ? (
                             <Button
                               variant="contained"
                               onClick={async () => {
@@ -153,7 +154,10 @@ export default function Train() {
                                     return prev + 1;
                                   }
                                 });
-                                const audioFile = await convertBlobUrlToFile(mediaBlobUrl);
+                                const audioFile = await convertBlobUrlToFile(
+                                  mediaBlobUrl,
+                                  activeStep
+                                );
                                 setSentencesAudios((prev) => ({
                                   ...prev,
                                   [activeStep]: audioFile
@@ -182,7 +186,10 @@ export default function Train() {
                                 // formData.forEach((item) => {
                                 //   console.log);
                                 // });
-                                const audioFile = await convertBlobUrlToFile(mediaBlobUrl);
+                                const audioFile = await convertBlobUrlToFile(
+                                  mediaBlobUrl,
+                                  activeStep
+                                );
                                 // setSentencesAudios((prev) => ({
                                 //   ...prev,
                                 //   [activeStep]: audioFile
@@ -191,15 +198,20 @@ export default function Train() {
                                 const formData = new FormData();
 
                                 formData.append('0', sentencesAudios['0']);
-                                formData.append('1', sentencesAudios['1']);
-                                formData.append('2', sentencesAudios['2']);
-                                formData.append('3', sentencesAudios['3']);
-                                formData.append('4', audioFile);
+                                // formData.append('1', sentencesAudios['1']);
+                                // formData.append('2', sentencesAudios['2']);
+                                // formData.append('3', sentencesAudios['3']);
+                                formData.append('1', audioFile);
 
                                 // eslint-disable-next-line no-restricted-syntax
                                 for (const pair of formData.entries()) {
                                   console.log(`${pair[0]}, ${pair[1]}`);
                                 }
+
+                                axios
+                                  .post('http://localhost:4000', formData)
+                                  .then((res) => console.log(res))
+                                  .catch((err) => console.error(err));
                                 // convert blob url to blob
                                 // const audioBlob = await fetch(sentencesAudios[activeStep]).then(
                                 //   (r) => r.blob()
