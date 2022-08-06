@@ -27,12 +27,12 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function Login() {
   return (
-    <RootStyle title="Login | Admin Panel">
+    <RootStyle title="Login | Creator">
       <Container maxWidth="sm">
         <ContentStyle>
           <Paper sx={{ mb: 5, textAlign: 'center', p: 6 }} elevation={8}>
             <Typography variant="h4" gutterBottom>
-              Log in
+              Log in | Creator
             </Typography>
             {/* <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography> */}
 

@@ -49,7 +49,7 @@ const Wallet = () => {
         const response = await solana.connect();
         console.log('wallet account ', response.publicKey.toString());
         appContext.setWalletKey(response.publicKey.toString());
-        navigate('/explore');
+        navigate('/dashboard/app');
       } catch (err) {
         // { code: 4001, message: 'User rejected the request.' }
       }

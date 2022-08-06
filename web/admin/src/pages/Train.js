@@ -8,12 +8,16 @@ import { ReactMediaRecorder } from 'react-media-recorder';
 import axios from 'axios';
 // material
 import { Stack, Container, Typography, Paper, Button, Grid, Backdrop, Card } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import micFill from '@iconify/icons-eva/mic-fill';
+import settingsFill from '@iconify/icons-eva/settings-2-fill';
 // components
 import Page from '../components/Page';
 import Waveform from '../components/Waveform';
 import { convertBlobUrlToFile } from '../utils/converters';
 import ModelCard from '../components/ModelCard';
+import keys from '../keys';
+
 //
 const later = (delay, value) => new Promise((resolve) => setTimeout(resolve, delay, value));
 export default function Train() {
@@ -22,14 +26,17 @@ export default function Train() {
   const [open, setOpen] = useState(false);
   // const [openEditNewsModal, setOpenEditNewsModal] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-  const [showTrainedModel, setShowTrainedModel] = useState(false);
+  const [showTrainedModel, setShowTrainedModel] = useState(
+    localStorage.getItem('showTrainedModel') || false
+  );
+  const [showStartTraining, setShowStartTraining] = useState(false);
 
   const [sentencesAudios, setSentencesAudios] = useState({
     0: null,
-    1: null
-    // 2: null,
-    // 3: null,
-    // 4: null
+    1: null,
+    2: null,
+    3: null,
+    4: null
   });
 
   useEffect(() => {
@@ -59,33 +66,77 @@ export default function Train() {
     }
   }, [scriptLoaded, open]);
 
-  const TOTAL_STEP = 2;
+  const TOTAL_STEP = 5;
   const content = [
-    'This is train data 1',
-    'This is train data 2'
-    // 'This is train data 3',
-    // 'This is train data 4',
-    // 'This is train data 5'
+    '" यो पुस्तक पढेपछि "',
+    '" यी प्रश्नहरूको तथा आउनेछ "',
+    '" कुनै व्यक्ती दुखि र अर्को सुखी किन हुन्छ "',
+    '" किन कुनै व्यक्तिको सम्पूर्ण हुन्छन् उनीहरूको निराश र निर्धन "',
+    '" किन कुनै व्यक्तिका तल्लो डरपोक हुन्छ "'
   ];
 
   return (
     <Page title="User">
-      <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" gutterBottom>
-            Training
-          </Typography>
-          {/* <Button
+      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5} ml={4}>
+        <Typography variant="h4" gutterBottom>
+          Training
+        </Typography>
+        {/* <Button
             variant="contained"
             onClick={() => setOpenEditNewsModal(true)}
             startIcon={<Icon icon={plusFill} />}
           >
             Training
           </Button> */}
-        </Stack>
-        {showTrainedModel ? (
-          <ModelCard />
-        ) : (
+      </Stack>
+      <Container
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column'
+        }}
+      >
+        {showStartTraining && !showTrainedModel && (
+          <Grid container sx={{ width: '100%' }} justifyContent="center" alignItems="center">
+            <Grid item sx={{ mt: 10 }}>
+              <LoadingButton
+                size="large"
+                variant="contained"
+                sx={{ p: 10 }}
+                color="primary"
+                onClick={async () => {
+                  await toast.promise(
+                    (async () => {
+                      try {
+                        // await axios.post('http://127.0.0.1:4000/train');
+                        await later(2000, 'training data simulator'); // since for now it will take longer to train data
+                        setShowTrainedModel(true); // we will show our trained model here
+                        localStorage.setItem('showTrainedModel', 'true');
+                      } catch (error) {
+                        throw console.log(error);
+                      }
+                    })(),
+                    {
+                      loading: <h3>Training...</h3>,
+                      success: <h3>Model Trained</h3>,
+                      error: <h3>Could not train.</h3>
+                    }
+                  );
+                }}
+              >
+                <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
+                  <Icon icon={settingsFill} color="#ffffff" height={50} />
+                  <Typography variant="h1" sx={{ color: 'white' }}>
+                    Start Training
+                  </Typography>
+                </Stack>
+              </LoadingButton>
+            </Grid>
+          </Grid>
+        )}
+        {showTrainedModel && <ModelCard />}
+        {!showStartTraining && !showTrainedModel ? (
           <>
             <Paper
               component={SwipeableViews}
@@ -94,7 +145,11 @@ export default function Train() {
               elevation={4}
             >
               {Array.from(new Array(TOTAL_STEP)).map((_, idx) => (
-                <Typography key={`traincontent${idx}`} sx={{ textAlign: 'center', p: 4 }}>
+                <Typography
+                  key={`traincontent${idx}`}
+                  sx={{ textAlign: 'center', p: 4 }}
+                  variant="h3"
+                >
                   {content[idx]}
                 </Typography>
               ))}
@@ -155,7 +210,7 @@ export default function Train() {
                               </Button>
                             )}
                             <Grid item>
-                              {activeStep !== 1 ? (
+                              {activeStep !== 4 ? (
                                 <Button
                                   variant="contained"
                                   onClick={async () => {
@@ -209,10 +264,10 @@ export default function Train() {
                                     const formData = new FormData();
 
                                     formData.append('0', sentencesAudios['0']);
-                                    // formData.append('1', sentencesAudios['1']);
-                                    // formData.append('2', sentencesAudios['2']);
-                                    // formData.append('3', sentencesAudios['3']);
-                                    formData.append('1', audioFile);
+                                    formData.append('1', sentencesAudios['1']);
+                                    formData.append('2', sentencesAudios['2']);
+                                    formData.append('3', sentencesAudios['3']);
+                                    formData.append('4', audioFile);
 
                                     // eslint-disable-next-line no-restricted-syntax
                                     for (const pair of formData.entries()) {
@@ -242,11 +297,12 @@ export default function Train() {
                                           // setOutput(data.output);
                                           // console.log('data from res', data.output);
                                           await axios.post(
-                                            'http://127.0.0.1:4000/upload',
+                                            // 'http://127.0.0.1:4000/upload',
+                                            keys.uploadUrl,
                                             formData
                                           );
 
-                                          setShowTrainedModel(true);
+                                          setShowStartTraining(true);
                                         } catch (error) {
                                           throw console.log(error);
                                           // appContext.handleAlert({
@@ -320,7 +376,7 @@ export default function Train() {
               </Grid>
             </Grid>
           </>
-        )}
+        ) : null}
       </Container>
     </Page>
   );
