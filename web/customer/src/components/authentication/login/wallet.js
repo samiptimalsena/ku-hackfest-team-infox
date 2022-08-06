@@ -53,7 +53,8 @@ const Wallet = () => {
         const response = await solana.connect();
         console.log("wallet account ", response.publicKey.toString());
         appContext.setWalletKey(response.publicKey.toString());
-        navigate("/explore");
+        localStorage.setItem("walletKey", response.publicKey.toString());
+        navigate("/dashboard/explore");
       } catch (err) {
         // { code: 4001, message: 'User rejected the request.' }
       }
@@ -105,7 +106,7 @@ const Wallet = () => {
             >
               <Icon icon={walletFill} color="#ffffff" height={24} />
               <Typography variant="button" sx={{ fontSize: 16 }}>
-                Connect to Phantom Wallet
+                Connect to Wallet
               </Typography>
             </Stack>
           </LoadingButton>

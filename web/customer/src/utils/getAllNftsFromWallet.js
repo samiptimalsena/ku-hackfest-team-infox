@@ -13,6 +13,7 @@ export const getAllNftsFromWallet = async (ownerPublickey) => {
 
   const dataReqs = nftsmetadata.map((d) => {
     const { uri } = d.data;
+    console.log({ uri });
     return Axios.get(uri).then(({ data }) => {
       const { name, image } = data;
       return { name, image, mint_address: d.mint };

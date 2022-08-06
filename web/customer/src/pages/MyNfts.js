@@ -21,7 +21,6 @@ export default function MyNfts() {
 
   useEffect(() => {
     getAllNftsFromWallet(walletKey).then((res) => {
-      console.log({ res });
       setNfts(res);
     });
   }, [walletKey]);

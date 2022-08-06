@@ -16,13 +16,13 @@ def main():
 @app.route("/upload", methods=['POST'])
 def upload():
     files = request.files
-    for i in range(2):
+    for i in range(5):
         wav_file = files.get(str(i))
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], f'train_demo_{str(i)}.wav')
         wav_file.save(file_path)
     return jsonify({"message":"api working fine"})
 
-@app.route("/train")
+@app.route("/train",methods=['POST'])
 def train():
     result = train_glow()
     if result == "completed":
@@ -33,4 +33,4 @@ def healthz():
     return "API is up and running"
 
 if __name__ == "__main__":
-    app.run(port=4000)
+    app.run(port=5001)

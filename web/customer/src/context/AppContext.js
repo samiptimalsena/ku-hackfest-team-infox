@@ -7,7 +7,9 @@ const AppProvider = ({ children }) => {
   const [showAlert, setShowAlert] = useState(false);
   const [severity, setSeverity] = useState("");
   const [message, setMessage] = useState("");
-  const [walletKey, setWalletKey] = useState("");
+  const [walletKey, setWalletKey] = useState(
+    localStorage.getItem("walletKey") || ""
+  );
   const handleAlert = (
     obj = {
       type: "error",

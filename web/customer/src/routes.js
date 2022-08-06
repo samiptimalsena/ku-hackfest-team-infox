@@ -34,13 +34,17 @@ export default function Router() {
             </PrivateRoute>
           ),
         },
+        {
+          path: "explore",
+          element: <Explore />,
+        },
       ],
     },
     {
       path: "/",
       element: <LogoOnlyLayout />,
       children: [
-        { path: "explore", element: <Explore /> },
+        // { path: "explore", element: <Explore /> },
         { path: "login", element: <Login /> },
         // { path: 'register', element: <Register /> },
         { path: "404", element: <NotFound /> },

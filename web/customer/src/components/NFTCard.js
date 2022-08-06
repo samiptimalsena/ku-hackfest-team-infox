@@ -72,7 +72,7 @@ export default function NFTCard(props) {
           elevation={4}
           sx={{
             width: 500,
-            height: "60%",
+            height: "63%",
             border: "none",
             outline: "none",
             position: "relative",
@@ -85,7 +85,7 @@ export default function NFTCard(props) {
           <CardMedia
             component="img"
             height="340"
-            image={props.item.image}
+            image={"http://assets.iotabots.io/175.png"}
             alt="green iguana"
             sx={
               {
@@ -96,7 +96,7 @@ export default function NFTCard(props) {
             }
           />
           <CardContent>
-            <Typography gutterBottom variant="h3" component="div">
+            <Typography gutterBottom variant="h5" component="div">
               {props.item.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">

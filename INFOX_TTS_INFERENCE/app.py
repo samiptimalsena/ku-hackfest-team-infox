@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, send_file
-# from infox_utils.inference_model import run_tts
-# from infox_utils.load_model import load_glow_hifi
+from infox_utils.inference_model import run_tts
+from infox_utils.load_model import load_glow_hifi
 from flask_cors import CORS
 
 import base64 
@@ -13,7 +13,7 @@ CORS(app)
 def main():
     return jsonify({"message": "Welcome to INFOX"})
 
-@app.route("/check")
+@app.route("/check",methods=['POST'])
 def check():
     saved_wav_path = "/home/maspi/code/KU_HACKFEST/INFOX_TTS_INFERENCE/output/sanup.wav"
     return send_file(
@@ -53,4 +53,4 @@ def healthz():
     return "api is up and working fine"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=5000)

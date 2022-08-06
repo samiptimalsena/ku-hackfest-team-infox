@@ -14,7 +14,9 @@ import {
 import Waveform from "../components/Waveform";
 import { styled } from "@mui/system";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { AppContext } from "../context/AppContext";
+import keys from "../keys";
 
 const StyledCard = styled(Card)({
   borderRadius: "10px",
@@ -86,42 +88,53 @@ export default function UserNFTCard(props) {
               variant="contained"
               sx={{ fontSize: 20 }}
               onClick={async () => {
-                // const res = await axios.post("http://127.0.0.1:5000/check", {
-                //   text: sentences,
-                //   username: "sanup",
-                // });
-                // const binaryData = [];
-                // binaryData.push(res.data);
-                // const file = window.URL.createObjectURL(
-                //   new Blob(binaryData, { type: "audio/wav" })
-                // );
-                // setFile(file);
-                // setFile(res.data);
-                const sig = await askForSinging();
-                console.log({ sig });
-                const res_from_min = await axios.post(
-                  "http://192.168.18.55:5000/api/solana/validate_nft_access",
+                setFile("");
+                toast.promise(
+                  (async () => {
+                    try {
+                      const sig = await askForSinging();
+                      console.log({ sig });
+                      const res_from_min = await axios.post(
+                        // "http://192.168.1.144:5000/api/solana/validate_nft_access",
+                        keys.validateUrl,
+                        {
+                          address: walletKey,
+                          sig,
+                          data: "TTS API ACCESS",
+                          nft_mint_address: props.item.mint_address,
+                        }
+                      );
+                      // console.log({ res });
+                      const data = res_from_min.data;
+                      // model name received
+                      const res = await axios.post(
+                        // "http://127.0.0.1:5000/api/inference/our_models",
+                        keys.inferenceUrl,
+                        {
+                          text: sentences,
+                          username: "sanup",
+                        },
+                        {
+                          responseType: "blob",
+                        }
+                      );
+                      const binaryData = [];
+                      binaryData.push(res.data);
+                      const file = window.URL.createObjectURL(
+                        new Blob(binaryData, { type: "audio/wav" })
+                      );
+
+                      setFile(file);
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  })(),
                   {
-                    address: walletKey,
-                    sig,
-                    data: "TTS API ACCESS",
-                    nft_mint_address: props.item.mint_address,
+                    loading: <h3>Getting Response</h3>,
+                    success: <h3>Success</h3>,
+                    error: <h3>Could not get response.</h3>,
                   }
                 );
-                // console.log({ res });
-                const data = res_from_min.data;
-                // model name received
-                const res = await axios.post("http://127.0.0.1:5000/check", {
-                  text: sentences,
-                  username: "sanup",
-                });
-                const binaryData = [];
-                binaryData.push(res.data);
-                const file = window.URL.createObjectURL(
-                  new Blob(binaryData, { type: "audio/wav" })
-                );
-
-                setFile(file);
               }}
             >
               Send
