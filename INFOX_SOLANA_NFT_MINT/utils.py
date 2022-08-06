@@ -18,8 +18,19 @@ def create_nfts(user_address,price):
 			data["solTreasuryAccount"] = user_address
 			data["price"] = price
 			data["number"] = NUM_ITEMS
+
 		with open('configs/metaplex_config.json', 'w') as f:
 			json.dump(data, f)
+
+		#update metadata
+		METADATAS = glob.glob("./assets/*.json")
+		for m_data in METADATAS:
+			with open(m_data, 'r') as f:
+				data = json.load(f) 
+				data["properties"]["creators"][0]["address"] = user_address
+			
+			with open(m_data, 'w') as f:
+				data = json.dump(data,f) 
 
 		# upload metadata
 		os.system('./scripts/upload.sh')

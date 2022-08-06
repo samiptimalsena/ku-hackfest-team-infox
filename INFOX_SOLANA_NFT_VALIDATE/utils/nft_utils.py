@@ -36,12 +36,12 @@ def get_nft_candy_machine_id(nft_mint_address):
 
 
 if __name__ == '__main__':
-    nft_mint_address = 'HxFqA1EbnPnC5NHXZoZ2YNEQumDzr567ftnVhFWZBNYK'
+    nft_mint_address = 'GmzgPnVcxzGztmB6RtxSU7o7nCA5F4SE1aFuLBQ4Htg'
     # owner = get_nft_owner(nft_mint_address)
     # print(owner)
 
-    # candyMachineId = get_nft_candy_machine_id("HxFqA1EbnPnC5NHXZoZ2YNEQumDzr567ftnVhFWZBNYK")
-    # print(candyMachineId)
+    candyMachineId = get_nft_candy_machine_id("GmzgPnVcxzGztmB6RtxSU7o7nCA5F4SE1aFuLBQ4Htg")
+    print(candyMachineId)
     
     # candyMachineId = get_nft_candy_machine_id("G2Vbermr17oxZif2zJQDJUcyq6bwQSJSc1okLTnPUtUp")
     # print(candyMachineId)

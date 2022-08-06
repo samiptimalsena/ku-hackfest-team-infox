@@ -8,7 +8,8 @@ nft_mint_address = "HxFqA1EbnPnC5NHXZoZ2YNEQumDzr567ftnVhFWZBNYK"
 
 
 savedCollections = {
-    "14PuYQvAzjcQBZBkv4zLXt5o7LCF6aJtKsw5A5AMNb6c":"model_name_user"
+    "14PuYQvAzjcQBZBkv4zLXt5o7LCF6aJtKsw5A5AMNb6c":"model_name_user",
+    "FUpo6HRHWig2CRB9DWGrv876XjPAhNMts4zA5WuMu7kY":"model_name_user"
 }
 
 def user_nft_request(address, sig, data, nft_mint_address):
