@@ -3353,7 +3353,7 @@
   "resolved" "https://registry.npmjs.org/axe-core/-/axe-core-4.2.3.tgz"
   "version" "4.2.3"
 
-"axios@0.24.0":
+"axios@^0.24.0":
   "integrity" "sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA=="
   "resolved" "https://registry.npmjs.org/axios/-/axios-0.24.0.tgz"
   "version" "0.24.0"
