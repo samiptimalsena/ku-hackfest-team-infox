@@ -1,5 +1,5 @@
-/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs_22k/ku_hackfest_part_1_0.wav|यो पुस्तक पढेपछि
-/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs_22k/ku_hackfest_part_1_1.wav|यी प्रश्नहरूको तथा आउनेछ
-/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs_22k/ku_hackfest_part_1_2.wav|कुनै व्यक्ती दुखि र अर्को सुखी किन हुन्छ
-/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs_22k/ku_hackfest_part_1_3.wav|किन कुनै व्यक्तिको सम्पूर्ण हुन्छन् उनीहरूको निराश र निर्धन
-/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs_22k/ku_hackfest_part_1_4.wav|किन कुनै व्यक्तिका तल्लो डरपोक हुन्छ
+/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs_22k/train_demo_0.wav|यो पुस्तक पढेपछि
+/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs_22k/train_demo_1.wav|यी प्रश्नहरूको तथा आउनेछ
+/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs_22k/train_demo_2.wav|कुनै व्यक्ती दुखि र अर्को सुखी किन हुन्छ
+/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs_22k/train_demo_3.wav|किन कुनै व्यक्तिको सम्पूर्ण हुन्छन् उनीहरूको निराश र निर्धन
+/home/maspi/code/KU_HACKFEST/INFOX_TTS_TRAIN/vakyansh-tts/data/wavs_22k/train_demo_4.wav|किन कुनै व्यक्तिका तल्लो डरपोक हुन्छ
