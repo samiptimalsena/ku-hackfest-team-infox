@@ -1,46 +1,34 @@
-import { Icon } from "@iconify/react";
-import boltFill from "@iconify/icons-ic/round-bolt";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 // import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
   Grid,
-  Button,
   Container,
   Stack,
   Typography,
-  TextField,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
   CircularProgress,
 } from "@mui/material";
 // components
 import Page from "../components/Page";
-import Waveform from "../components/Waveform";
-import { styled } from "@mui/system";
+import UserNftCard from "../components/UserNftCard";
 
-import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
-import NFTCard from "../components/NFTCard";
-import { db } from "../service/firebase";
+import { getAllNftsFromWallet } from "../utils/getAllNftsFromWallet";
+import { AppContext } from "../context/AppContext";
 
 export default function MyNfts() {
-  const [sentences, setSentences] = useState("");
-  const [showAudioWave, setShowAudioWave] = useState(false);
-  const [models, setModels] = useState(null);
+  const { walletKey } = useContext(AppContext);
+  const [nfts, setNfts] = useState(null);
 
   useEffect(() => {
-    onSnapshot(collection(db, "users"), (snapshot) =>
-      setModels(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-    );
-  }, []);
-
-  console.log({ models });
+    getAllNftsFromWallet(walletKey).then((res) => {
+      console.log({ res });
+      setNfts(res);
+    });
+  }, [walletKey]);
 
   return (
-    <Page title="Explore NFTs">
-      <Container maxWidth="lg" sx={{ p: 4 }}>
+    <Page title="My NFTs">
+      <Container sx={{ p: 4, width: "100%" }}>
         <Stack
           direction="row"
           alignItems="center"
@@ -53,41 +41,17 @@ export default function MyNfts() {
           </Typography>
         </Stack>
         <Grid container spacing={4} justifyContent="center">
-          {!models ? (
+          {!nfts ? (
             <Grid item>
               <CircularProgress />
             </Grid>
           ) : (
-            models.map((item) => (
+            nfts.map((item) => (
               <Grid item>
-                <NFTCard item={item} />
+                <UserNftCard item={item} />
               </Grid>
             ))
           )}
-          {/* <Grid item>
-            <NFTCard />
-          </Grid>
-          <Grid item>
-            <NFTCard />
-          </Grid>
-          <Grid item>
-            <NFTCard />
-          </Grid>
-          <Grid item>
-            <NFTCard />
-          </Grid>
-          <Grid item>
-            <NFTCard />
-          </Grid>
-          <Grid item>
-            <NFTCard />
-          </Grid>
-          <Grid item>
-            <NFTCard />
-          </Grid>
-          <Grid item>
-            <NFTCard />
-          </Grid> */}
         </Grid>
       </Container>
     </Page>

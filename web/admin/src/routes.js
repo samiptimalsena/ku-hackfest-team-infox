@@ -15,13 +15,14 @@ import Gallery from './pages/Gallery';
 import Program from './pages/Program';
 import Train from './pages/Train';
 import Model from './pages/Model';
+import { AppContext } from './context/AppContext';
 
 // ----------------------------------------------------------------------
 
-// const PrivateRoute = ({ children }) => {
-//   const auth = useContext(AuthContext);
-//   return auth.isAuthenticated() ? children : <Navigate to="/login" />;
-// };
+const PrivateRoute = ({ children }) => {
+  const app = useContext(AppContext);
+  return app.isAuthenticated() ? children : <Navigate to="/login" />;
+};
 
 export default function Router() {
   return useRoutes([
@@ -35,57 +36,25 @@ export default function Router() {
         {
           path: 'app',
           element: (
-            // <PrivateRoute>
-            <DashboardApp />
-            // </PrivateRoute>
+            <PrivateRoute>
+              <DashboardApp />
+            </PrivateRoute>
           )
         },
         {
           path: 'train',
           element: (
-            // <PrivateRoute>
-            <Train />
-            // </PrivateRoute>
+            <PrivateRoute>
+              <Train />
+            </PrivateRoute>
           )
         },
         {
           path: 'model',
           element: (
-            // <PrivateRoute>
-            <Model />
-            // </PrivateRoute>
-          )
-        },
-        {
-          path: 'programs',
-          element: (
-            // <PrivateRoute>
-            <Program />
-            // </PrivateRoute>
-          )
-        },
-        {
-          path: 'videos',
-          element: (
-            // <PrivateRoute>
-            <Videos />
-            // </PrivateRoute>
-          )
-        },
-        {
-          path: 'blog',
-          element: (
-            // <PrivateRoute>
-            <Blog />
-            // </PrivateRoute>
-          )
-        },
-        {
-          path: 'gallery',
-          element: (
-            // <PrivateRoute>
-            <Gallery />
-            // </PrivateRoute>
+            <PrivateRoute>
+              <Model />
+            </PrivateRoute>
           )
         }
       ]

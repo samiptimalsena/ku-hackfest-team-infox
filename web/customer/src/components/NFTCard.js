@@ -50,6 +50,9 @@ export default function NFTCard(props) {
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
+  //   image: "https://arweave.net/gnVJVSQJ5ix85WfLWbLPLpDZW5u79OyN93Utit_gzrE?ext=png"
+  // mint_address: "7fz4WZY7hThEHNzdxZZpByuUZuRouctbohfYWzZ7wRGf"
+  // name: "Number #0010"
   return (
     <>
       <Modal
@@ -82,7 +85,7 @@ export default function NFTCard(props) {
           <CardMedia
             component="img"
             height="340"
-            image="http://assets.iotabots.io/175.png"
+            image={props.item.image}
             alt="green iguana"
             sx={
               {
@@ -94,7 +97,7 @@ export default function NFTCard(props) {
           />
           <CardContent>
             <Typography gutterBottom variant="h3" component="div">
-              {props.item.user_name}
+              {props.item.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               #{props.item.model_name}

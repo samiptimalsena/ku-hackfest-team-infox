@@ -14,10 +14,13 @@ import { AppContext } from '../../../context/AppContext';
 import publicFetch from '../../../utils/fetch';
 import { AuthContext } from '../../../context/AuthContext';
 import { signInWithGoogle } from '../../../service/firebase';
+import { Wallet } from './Wallet';
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+  const { setName, setEmail, setLoggedInWithGoogle } = useContext(AppContext);
   return (
     <Stack spacing={2}>
       <LoadingButton
@@ -26,7 +29,14 @@ export default function LoginForm() {
         type="submit"
         color="primary"
         variant="contained"
-        onClick={signInWithGoogle}
+        onClick={async () => {
+          const res = await signInWithGoogle();
+          // console.log({ res });
+          setEmail(res.user.email);
+          setName(res.user.displayName);
+          setLoggedInWithGoogle(true);
+          navigate('/dashboard/app');
+        }}
         loading={false}
       >
         <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
@@ -37,7 +47,8 @@ export default function LoginForm() {
           </Typography>
         </Stack>
       </LoadingButton>
-      <LoadingButton
+      <Wallet />
+      {/* <LoadingButton
         fullWidth
         size="large"
         type="submit"
@@ -51,7 +62,7 @@ export default function LoginForm() {
             Login With Wallet
           </Typography>
         </Stack>
-      </LoadingButton>
+      </LoadingButton> */}
     </Stack>
   );
 }

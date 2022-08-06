@@ -30,7 +30,7 @@ export default function Login() {
     <RootStyle title="Login | Admin Panel">
       <Container maxWidth="sm">
         <ContentStyle>
-          <Paper sx={{ mb: 5, textAlign: 'center', p: 6 }} elevation={2}>
+          <Paper sx={{ mb: 5, textAlign: 'center', p: 6 }} elevation={8}>
             <Typography variant="h4" gutterBottom>
               Log in
             </Typography>

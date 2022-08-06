@@ -16,36 +16,19 @@ const sidebarConfig = [
     path: '/dashboard/app',
     icon: getIcon(pieChart2Fill)
   },
-  //   {
-  //     title: 'recent activities',
-  //     path: '/dashboard/recent-activities',
-  //     icon: getIcon(news)
-  //   },
+
   {
     title: 'Train',
     path: '/dashboard/train',
     icon: getIcon(training)
   },
-  // {
-  //   title: 'news',
-  //   path: '/dashboard/news',
-  //   icon: getIcon(news)
-  // },
+
   {
     title: 'Model',
     path: '/dashboard/model',
     icon: getIcon(robotFill)
-  },
-  {
-    title: 'blog',
-    path: '/dashboard/blog',
-    icon: getIcon(fileTextFill)
-  },
-  {
-    title: 'gallery',
-    path: '/dashboard/gallery',
-    icon: getIcon(gallery)
   }
+
   //   {
   //     title: 'login',
   //     path: '/login',

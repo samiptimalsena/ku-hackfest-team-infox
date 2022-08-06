@@ -8,6 +8,9 @@ const AppProvider = ({ children }) => {
   const [severity, setSeverity] = useState('');
   const [message, setMessage] = useState('');
   const [walletKey, setWalletKey] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [loggedInWithGoogle, setLoggedInWithGoogle] = useState(false);
   const handleAlert = (
     obj = {
       type: 'error',
@@ -19,6 +22,12 @@ const AppProvider = ({ children }) => {
     setMessage(obj.message);
   };
 
+  const isAuthenticated = () => {
+    if (name && email && loggedInWithGoogle) return true;
+    if (walletKey) return true;
+    return false;
+  };
+
   return (
     <Provider
       value={{
@@ -28,7 +37,14 @@ const AppProvider = ({ children }) => {
         severity,
         message,
         walletKey,
-        setWalletKey
+        setWalletKey,
+        name,
+        setName,
+        email,
+        setEmail,
+        loggedInWithGoogle,
+        setLoggedInWithGoogle,
+        isAuthenticated
       }}
     >
       {children}
