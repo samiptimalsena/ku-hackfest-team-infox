@@ -4,6 +4,7 @@ import 'simplebar/src/simplebar.css';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { Toaster } from 'react-hot-toast';
 
 //
 import App from './App';
@@ -17,6 +18,21 @@ ReactDOM.render(
   <HelmetProvider>
     <BrowserRouter>
       <AppProvider>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{
+            style: {
+              border: '1px solid #110171',
+              padding: '16px',
+              color: '#110171'
+            },
+            iconTheme: {
+              primary: '#110171',
+              secondary: '#D6E4FF'
+            }
+          }}
+        />
         <App />
       </AppProvider>
     </BrowserRouter>

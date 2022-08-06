@@ -10,11 +10,7 @@
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended"
   ],
-  "plugins": [
-    "prettier",
-    "react",
-    "react-hooks"
-  ],
+  "plugins": ["prettier", "react", "react-hooks"],
   "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 8,
@@ -55,6 +51,7 @@
     "import/no-extraneous-dependencies": 0,
     "react/jsx-key": 1,
     "react-hooks/rules-of-hooks": 2,
+    "react/jsx-curly-brace-presence": 0,
     "no-unused-vars": [
       1,
       {

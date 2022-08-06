@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
   const [showAlert, setShowAlert] = useState(false);
   const [severity, setSeverity] = useState('');
   const [message, setMessage] = useState('');
+  const [walletKey, setWalletKey] = useState('');
   const handleAlert = (
     obj = {
       type: 'error',
@@ -25,7 +26,9 @@ const AppProvider = ({ children }) => {
         showAlert,
         setShowAlert,
         severity,
-        message
+        message,
+        walletKey,
+        setWalletKey
       }}
     >
       {children}

@@ -11,6 +11,8 @@ import Waveform from '../components/Waveform';
 export default function Model() {
   const [sentences, setSentences] = useState('');
   const [showAudioWave, setShowAudioWave] = useState(false);
+  const [isModelAvailable, setIsModelAvailable] = useState(false);
+  const [isDemoModelActivated, setIsDemoModelActivated] = useState(false);
   return (
     <Page title="Dashboard: Recent Activities">
       <Container maxWidth="lg">
@@ -18,41 +20,74 @@ export default function Model() {
           <Typography variant="h4" gutterBottom>
             Model Section
           </Typography>
-          <Button
-            variant="contained"
-            // onClick={() => setOpenAddProgramModal(true)}
-            startIcon={<Icon icon={boltFill} />}
-          >
-            Try our demo model
-          </Button>
         </Stack>
-        <Stack
-          // container
-          sx={{ width: '100%' }}
-          spacing={2}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <TextField
-            value={sentences}
-            onChange={(e) => setSentences(e.target.value)}
-            autoComplete="sentences"
-            name="sentences"
-            required
-            fullWidth
-            multiline
-            // sx={{ height: '400px' }}
-            rows={10}
-            id="sentences"
-            label="Sentences"
-            // inputProps={{ step: 1000 }}
-            autoFocus
-          />
-          <Button variant="contained" sx={{ fontSize: 20 }} onClick={() => setShowAudioWave(true)}>
-            Send
-          </Button>
-          {showAudioWave && <Waveform demo />}
-        </Stack>
+        {isModelAvailable && (
+          <Stack sx={{ width: '100%' }} spacing={2} justifyContent="center" alignItems="center">
+            <TextField
+              value={sentences}
+              onChange={(e) => setSentences(e.target.value)}
+              autoComplete="sentences"
+              name="sentences"
+              required
+              fullWidth
+              multiline
+              rows={10}
+              id="sentences"
+              label="Sentences"
+              autoFocus
+            />
+            <Button
+              variant="contained"
+              sx={{ fontSize: 20 }}
+              onClick={() => setShowAudioWave(true)}
+            >
+              Send
+            </Button>
+            {showAudioWave && <Waveform demo />}
+          </Stack>
+        )}
+        {!isModelAvailable && !isDemoModelActivated && (
+          <Stack justifyContent="center" alignItems="center" spacing={4}>
+            <Typography variant="h6">You haven't built your model</Typography>
+            <Button
+              variant="contained"
+              size="large"
+              sx={{ p: 5 }}
+              startIcon={<Icon icon={boltFill} />}
+              onClick={() => {
+                setIsDemoModelActivated(true);
+              }}
+            >
+              <Typography variant="h5">Try our free demo model</Typography>
+            </Button>
+          </Stack>
+        )}
+        {isDemoModelActivated && (
+          <Stack sx={{ width: '100%' }} spacing={2} justifyContent="center" alignItems="center">
+            <Typography variant="h5">Demo Model</Typography>
+            <TextField
+              value={sentences}
+              onChange={(e) => setSentences(e.target.value)}
+              autoComplete="sentences"
+              name="sentences"
+              required
+              fullWidth
+              multiline
+              rows={10}
+              id="sentences"
+              label="Sentences"
+              autoFocus
+            />
+            <Button
+              variant="contained"
+              sx={{ fontSize: 20 }}
+              onClick={() => setShowAudioWave(true)}
+            >
+              Send
+            </Button>
+            {showAudioWave && <Waveform demo />}
+          </Stack>
+        )}
       </Container>
     </Page>
   );
